@@ -1,0 +1,112 @@
+body{
+    overflow-x: hidden;
+}
+#iniciosesion{
+    z-index: 5;
+    background: rgba(28, 28, 28, 0.9);
+    overflow-y: scroll;
+}
+
+#articulosAgregados{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100vw;
+    min-height: 50vh;
+    color: #fff;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    text-align: center;
+
+
+}
+.listaSinNombre{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 20vh;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+#productosAgregado{
+    width: 100%;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+#productosAgregado tr,td{
+    text-align: center;
+    width: 80vw;
+    
+}
+th{
+    text-align: center;
+    border-bottom: 3px solid #fff;
+    width: 80vw;
+    padding: 10px 12px;
+}
+.formStyle{
+    border: 1px solid #fff;
+    width: 100%;
+    border-radius: 10px;
+    padding: 20px 0px;
+}
+
+
+#nombreFormAgregar, #precioFormAgregar, #imagenFormAgregar{
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    background: none;
+    border-bottom: 3px solid #fff;
+    width:80%;
+    margin:10px auto;
+    color: #fff;
+}
+
+
+.botonAgregar{
+    border: none;
+    border-radius: 10px;
+    background: #fff;
+    color: #333;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 20px;
+}
+.botonAgregar:hover{
+    background: #333;
+    color: #fff;
+}
+.botonAgregar:active{
+    background: #333;
+    color: #fff;
+}   .botonAgregar:focus{
+    background: #333;
+    color: #fff;
+}
+.mt {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+
+.si i {
+	font-size: 40px;
+	padding: 20px;
+}
+
+#articulosAgregados, #carritoDeCompras{
+    display:none;
+}
