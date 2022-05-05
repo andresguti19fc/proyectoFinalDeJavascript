@@ -18,9 +18,10 @@ let data,
 
 
 async function renderizar() {
-    const result = await fetch(url);
+    const res = await fetch(url);
     
-    data = await result.json();
+    data = await res.json();
+    console.log(data);
     
     for (let i = 0; i < data.length; i++) {
         let { imagen, nombre, precio } = data[i]; //destrructuracion
@@ -53,6 +54,12 @@ async function renderizar() {
 
 renderizar();
 let BBDD = JSON.parse(localStorage.getItem("BASEDEDATOS"));
+/**
+ * If the product is not in the cart, add it to the cart, otherwise increase the quantity of the
+ * product in the cart.
+ * @param i - the index of the product in the BBDD array
+ */
+
 function agregarAlCarrito(i) {
     let producto = BBDD[i];
     let existe = false;
@@ -114,8 +121,27 @@ function comprarCarrito(i) {
   let btnAgregarArticulo = document.getElementById("btnFormAgregar");
 btnAgregarArticulo.addEventListener("click", agregar);
 
+/* function agregar(nombre, precio, imagen, id, cantidad) {
+    
+   nombre.preventDefault();
+   let imagenInput = document.getElementById("imagenFormAgregar").value;
+    let inputAgregarArticulo = document.getElementById("nombreFormAgregar").value;
+    let inputAgregarPrecio = document.getElementById("precioFormAgregar").value;
+   imagen = imagenInput; 
+   nombre=inputAgregarArticulo;
+   precio=inputAgregarPrecio;
+cantidad=0;
+id= BBDD.length + 1;
+    let nuevoArticulo = JSON.parse(localStorage.getItem("BASEDEDATOS"));
+    nuevoArticulo.push(new Basededatos(imagen, nombre, precio, id, cantidad));
+    BBDD = [...BBDD, nuevoArticulo];
+    localStorage.setItem("BASEDEDATOS", JSON.stringify(BBDD));
 
-
+  
+    tiendaAdicta.innerHTML = "";
+  renderizar();
+ console.log("agregar");
+}  */
 
 function agregar(e) {
     e.preventDefault();
@@ -136,8 +162,6 @@ function agregar(e) {
         .then(res => res.json())
         .then(data => {
             console.log(data);
-            BBDD.push(data);
-            localStorage.setItem("BASEDEDATOS", JSON.stringify(BBDD));
             tiendaAdicta.innerHTML = "";
             renderizar();
         }        )
@@ -146,7 +170,10 @@ function agregar(e) {
    
 
     /* (nombre === "" || precio === "" || imagen === "") ? swal.fire("debe llenar todos los campos", "", "warning") : swal.fire("listo. su producto fue agregado.", "", "success"); // operador ternario */
+ 
+/* console.log(BBDD);
 
+console.log(carrito); */
 /*** datos de la compra ***/
 let pagarTodo = document.getElementById("pagarTodo");
 pagarTodo.addEventListener("click", pagarTodoCarrito);
@@ -187,7 +214,6 @@ let contadorCarritoPagarTodo = document.getElementById("contadorCarritoPagarTodo
 
 document.getElementById("carritoDeCompras").addEventListener("click", () => abrirVentana("carritoDeCompras"));
 document.getElementById("articulosAgregados").addEventListener("click", () => abrirVentana("articulosAgregados"));
-
 function abrirVentana(ventana) {
     if (ventana == "carritoDeCompras") {
         document.getElementById("carritoDeCompras").style.display = "block";
