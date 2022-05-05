@@ -150,7 +150,9 @@ function agregar(e) {
     let imagen = document.getElementById("imagenFormAgregar").value;
     let id = BBDD.length + 1;
     let cantidad = 0;
-    let nuevoArticulo = []
+    let nuevoArticulo = [];
+    nuevoArticulo.push(imagen, nombre, precio, id, cantidad);
+    localStorage.setItem("BASEDEDATOS", JSON.stringify(nuevoArticulo));
     
     fetch(url, {
         method: "POST",
