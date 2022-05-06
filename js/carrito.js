@@ -91,10 +91,10 @@ function renderizarCarrito() {
 function eliminarDelCarrito(i) {
   //eliminar del carrito
   index = carrito.findIndex((producto) => producto.id == carrito[i].id);
+  console.log(index);
     carrito.splice(index, 1);
     
     carritoAdicta.innerHTML = "";
-    renderizarCarrito();
 
 
 }
