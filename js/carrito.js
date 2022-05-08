@@ -11,6 +11,7 @@ let data,
   mostrarPago = document.getElementById("mostrarPago"),
   contadorCarrito = document.getElementById("contadorCarrito"),
   contadorCarritoPagarTodo = document.getElementById("contadorCarritoPagarTodo"),
+  formReset = document.getElementById("formAgregarArticulos"),
   BBDD = [];
 /* ++++++++++++++++++++++++++++ */
 BBDD = JSON.parse(localStorage.getItem("BASEDEDATOS"));
@@ -77,10 +78,17 @@ function agregarAlCarrito(i) {
         showConfirmButton: false,
         timer: 500
       })
+      
+
   }
+  window.localStorage.setItem('carrito', JSON.stringify(carrito));  
+  contadorCarritoPagarTodo.innerHTML = carrito.length;
   carritoAdicta.innerHTML = "";
   renderizarCarrito();
+  /*  */
+
 }
+
 function renderizarCarrito() {
   for (let i = 0; i < carrito.length; i++) {
     let { nombre, precio, cantidad, id } = carrito[i];
@@ -105,7 +113,7 @@ function renderizarCarrito() {
   }
 }
 function eliminarDelCarrito(i) {
-  console.log("eliminar del carrito");
+ 
   /* 
     carrito.splice(index, 1); */
   Swal.fire({
@@ -117,34 +125,29 @@ function eliminarDelCarrito(i) {
     cancelButtonColor: '#d33',
     confirmButtonText: 'Si, eliminar!'
   }).then((result) => {
-    if (result.isConfirmed) {
-      console.log("confirmar eliminaciion");
     
-      Swal.fire(
+    if (result.isConfirmed) {
+     /*  Swal.fire(
         'Listo!',
         'El producto fue.',
         'success'
       )
+       */
       
   
     }
     
   })
-  let { id } = carrito[i];
   carrito.splice(i, 1);
   carritoAdicta.innerHTML = "";
   contadorCarrito.innerHTML = carrito.length;
+  contadorCarritoPagarTodo.innerHTML = carrito.length;
   total2 = carrito.reduce(
     (accum, producto) => accum + producto.precio * producto.cantidad,
     0
   );
-  subtotal = total2;
   totalPagar = total2;
-  contadorCarritoPagarTodo.innerHTML = carrito.length;
-  
-  /* carritoAdicta.innerHTML = ""; */
-
-
+ 
 }
 function comprarCarrito(i) {
   let { cantidad, precio } = carrito[i]; // destrructuracion
@@ -156,6 +159,11 @@ function comprarCarrito(i) {
 }
 function agregar(e) {
   e.preventDefault();
+  if(usuario !== "" && isNaN("usuario") && contrasena !== "" && !isNaN(contrasena)){
+    swal.fire("Gracias ", ``, "success");
+  }else{
+    swal.fire("debe iniciar sesion", "", "warning");
+  }
   let nombre = document.getElementById("nombreFormAgregar").value;
   let precio = document.getElementById("precioFormAgregar").value;
   let imagen = document.getElementById("imagenFormAgregar").value;
@@ -169,11 +177,12 @@ function agregar(e) {
     id,
     cantidad,
   };
+  
   BBDD = [...BBDD, nuevoArticulo];
   localStorage.setItem("BASEDEDATOS", JSON.stringify(BBDD));
   BBDD = JSON.parse(localStorage.getItem("BASEDEDATOS"));
-  BBDD.forEach((producto) => {
-    
+  
+  BBDD.forEach((producto) => {    
     tiendaAdicta.innerHTML = "";
     tiendaAdicta.innerHTML += `
     <div class="col-md-4 my-5">
@@ -193,12 +202,9 @@ function agregar(e) {
         </div>
         </div>
     `;
-    console.log(producto);
-    console.log(BBDD);
-    }
-
-    );
+    });
     renderizar();
+    formReset.reset();
 }
 
 function pagarTodoCarrito() {
@@ -207,7 +213,7 @@ function pagarTodoCarrito() {
   const hora = DateTime.local().hour;
   const minuto = DateTime.local().minute;
   const segundo = DateTime.local().second;
-
+  
   setTimeout(() => {
     Swal.fire({
       title: `
@@ -237,8 +243,10 @@ function pagarTodoCarrito() {
   }, 500);
 
   carritoAdicta.innerHTML = ""; 
-  contadorCarrito = 0;
-  total2 = 0;
+  contadorCarrito.innerHTML = 0;
+  contadorCarritoPagarTodo.innerHTML = 0;
+  
+  
 }
 /*** datos de la compra ***/
 
@@ -264,7 +272,6 @@ function abrirVentana(ventana) {
   }
 }
 document.getElementById("1").addEventListener("click", () => {
-    console.log("funciono");
   return abrirVentana("carritoDeCompras");
 });
 document.getElementById("2").addEventListener("click", () => {
@@ -276,8 +283,9 @@ document.getElementById("3").addEventListener("click", () => {
 
 document.getElementById("carritoCompras").addEventListener("click", (e) => {
     e.preventDefault();
-    console.log("funciono");
     return abrirVentana("carritoDeCompras");
     }
     );
 
+    
+    
