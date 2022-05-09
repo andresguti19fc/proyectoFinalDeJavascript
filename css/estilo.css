@@ -1,6 +1,18 @@
 body{
     overflow-x: hidden;
 }
+.botones{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    margin-left: 50px;
+    padding: 0;
+
+
+}
 #iniciosesion{
     z-index: 5;
     background: rgba(28, 28, 28, 0.9);
