@@ -112,8 +112,8 @@ function renderizarCarrito() {
       </tr>
       </tbody>
   `;
-  
   }
+  
 total2 = JSON.parse(localStorage.getItem("total"));
 contador = JSON.parse(localStorage.getItem("contador"));
 contadorCarritoPagarTodo.innerHTML = contador;
@@ -122,8 +122,12 @@ contadorCarrito.innerHTML = contador;
 }
 function comprarCarrito(i) {
   let arr = JSON.parse(sessionStorage.getItem("carrito"));
-  swal.fire("Compra realizada", `Gracias por comprar con nosotros ${precioTotalprenda}`, "success");
+  let precioTotalPrenda = arr[i].precio * arr[i].cantidad;
+  swal.fire("Compra realizada", `Gracias por comprar con nosotros ${precioTotalPrenda}`, "success");
+  
   arr.splice(i, 1);
+  total2 = arr.reduce((accum, producto) => accum + producto.precio * producto.cantidad, 0);
+  localStorage.setItem("total", JSON.stringify(total2));
   sessionStorage.setItem("carrito", JSON.stringify(arr));
   carritoAdicta.innerHTML = "";
   let arrContador = JSON.parse(localStorage.getItem("contador"));
@@ -131,28 +135,22 @@ function comprarCarrito(i) {
   localStorage.setItem("contador", JSON.stringify(arrContador));
   contadorCarrito.innerHTML = arrContador;
   contadorCarritoPagarTodo.innerHTML = arrContador;
-  let arrTotal = JSON.parse(localStorage.getItem("total"));
-  arrTotal = precioTotalprenda;
-  console.log(arrTotal);
-  console.log(precioTotalprenda);
-  localStorage.setItem("total", JSON.stringify(arrTotal));
-  carritoAdicta.innerHTML = "";
-}
+ 
+  }
 function eliminarDelCarrito(i) { 
   let arr = JSON.parse(sessionStorage.getItem("carrito"));
   arr.splice(i, 1);
   sessionStorage.removeItem(arr);
+  total2 = arr.reduce((accum, producto) => accum + producto.precio * producto.cantidad, 0);
+  
+  localStorage.setItem("total", JSON.stringify(total2));
   sessionStorage.setItem("carrito", JSON.stringify(arr));
   let arrContador = JSON.parse(localStorage.getItem("contador"));
   arrContador--;
   localStorage.setItem("contador", JSON.stringify(arrContador));
   contadorCarrito.innerHTML = arrContador;
   contadorCarritoPagarTodo.innerHTML = arrContador;
-  let arrTotal = JSON.parse(localStorage.getItem("total"));  
-  arrTotal = total2 - precioTotalprenda;
-  console.log(carritoS.precioTotalprenda);
-  localStorage.setItem("total", JSON.stringify(arrTotal));
-  carritoAdicta.innerHTML = "";
+ carritoAdicta.innerHTML = "";
 }
 function agregar(e) {
   e.preventDefault();
