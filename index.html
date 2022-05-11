@@ -31,31 +31,35 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         <li class="nav-item"></li>
                         <li class="nav-item"></li>
-                        
+
                     </ul>
-                    <button class="btn btn-outline-light" id="ecomerceVentana">
-                        <i class="bi bi-handbag-fill"></i>
-                        e-comerce
-                    </button>
-                    
-                    <form class="d-flex mx-3" id="carrito">
-                        <button class="btn btn-outline-light" id="carritoCompras">
-                            <i class="bi-cart-fill me-1"></i>
-                            Cart
-                            <span id="contadorCarrito" class="badge bg-dark text-white ms-1 rounded-pill botonCarrito">0</span>
+                    <div class="mx-3 botones">
+                        <button class="btn btn-outline-light" id="ecomerceVentana">
+                            <i class="bi bi-handbag-fill"></i>
+                            e-comerce
                         </button>
 
-                    </form>
-                    <button class="btn btn-outline-light" id="mercaderiaVentana">
-                        <i class="bi bi-sliders"></i>
-                        mercaderia
-                    </button>
-                    <form class="d-flex mx-3" id="iniciarSesion">
-                        <button class="btn btn-outline-light" id="formIniciarSesion">
-                            <i class="bi bi-door-open"></i>
-                            iniciar sesion
+                        <form class="d-flex" id="carrito">
+                            <button class="btn btn-outline-light" id="carritoCompras">
+                                <i class="bi-cart-fill me-1"></i>
+                                Carrito
+                                <span id="contadorCarrito"
+                                    class="badge bg-dark text-white ms-1 rounded-pill botonCarrito">0</span>
+                            </button>
+
+                        </form>
+                        <button class="btn btn-outline-light" id="mercaderiaVentana">
+                            <i class="bi bi-sliders"></i>
+                            mercaderia
                         </button>
-                    </form>
+                        <form class="d-flex" id="iniciarSesion">
+                            <button class="btn btn-outline-light" id="formIniciarSesion">
+                                <i class="bi bi-door-open"></i>
+                                iniciar sesion
+                            </button>
+                        </form>
+                    </div>
+
                 </div>
             </div>
         </nav>
@@ -64,7 +68,8 @@
 
 
                 <div class="col-md-4 mx-1 my-1 input-group-sm flex-nowrap">
-                    <input type="text" class="form-control w-80 bg-transparent border-none text-light" id="usuarioId" placeholder="usuario" required>
+                    <input type="text" class="form-control w-80 bg-transparent border-none text-light" id="usuarioId"
+                        placeholder="usuario" required>
                     <div class="valid-tooltip">
                         Looks good!
                     </div>
@@ -81,7 +86,7 @@
         </nav>
     </header>
     <!--carrusel-->
-    <section class="container">
+    <section class="container seccion1">
         <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -114,10 +119,10 @@
     <section class="py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="row gx-4 gx-lg-5 align-items-center">
-                <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="images/adicta.jpg" alt="..." /></div>
+                <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0 rounded-circle" src="images/adicta.jpg" alt="..." /></div>
                 <div class="col-md-6">
                     <h1 class="display-5 fw-bolder">AdictaSomos</h1>
-                    
+
                     <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem
                         quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis
                         delectus ipsam minima ea iste laborum vero?</p>
@@ -134,26 +139,16 @@
                                 carrito
                             </button>
                             <br>
-                              
-                            <br>  
-                            
+                            <br>
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
-
         </div>
     </section>
-    <section>
-        
-    </section>
-
     <!-- Related items section-->
     <section class="py-5 bg-ligth">
-        
+
         <article id="ecomerce">
             <div class="container px-4 px-lg-5 mt-5">
                 <h2 class="fw-bolder mb-4 bg-light text-center py-3">E-comerce</h2>
@@ -167,31 +162,32 @@
             <!-- *** carrito de compras *** -->
 
             <div class="container"></div>
-         
+
             <div class="container">
-<h3 class="text-center bg-dark text-white display-5 fw-bold py-4">CARRITO DE COMPRAS</h3>
+                <h3 class="text-center bg-dark text-white display-5 fw-bold py-4">CARRITO DE COMPRAS</h3>
                 <div class="row">
-                  <div class="col-12 col-md-4 my-5 vw-100">
-    
-            <table class="table table-striped">
-            <thead>
-            <tr>
-            <th scope="col">Producto</th>
-            <th scope="col">Cantidad</th>
-            <th scope="col">Precio</th>
-            <th scope="col">Total</th>
-            </tr>
-            </thead>
-            <tbody id="carritoAdicta">
+                    <div class="col-12 col-md-4 my-5 vw-100">
 
-            </tbody>
-            </table>
-            </div>  
-            </div>
-            </div>
-        <!-- *** carrito de compras *** -->
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">imagen</th>
+                                    <th scope="col">Producto</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Precio</th>
+                                    <th scope="col">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="carritoAdicta">
 
-        
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- *** carrito de compras *** -->
+
+
         </article>
         <div class="container px-4 px-lg-5 mt-5">
             <h2 class="fw-bolder mb-4 bg-light text-center py-3">
@@ -204,9 +200,9 @@
 
             </div>
         </div>
-        
-            
-       
+
+
+
         <article id="mostrarPago">
 
         </article>
@@ -221,7 +217,6 @@
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Agregar nombre del producto.</label>
                             <input type="text" class="form-control" id="nombreFormAgregar" required>
-
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Agregar el precio del producto</label>
@@ -236,56 +231,35 @@
                     </form>
                 </div>
             </div>
-
-           
-            
         </div>
-
     </section>
-    <!-- +++Agregar articulos+++-->
-    <!-- *** tarjetas *** -->
     <div class="container text-center">
         <div class="row mt">
-          <div class="col-lg-4 centered si">
-            <i class="bi bi-credit-card"></i>
-            <h4>Elige como pagar.</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, optio. At, dolorum officia incidunt, ab similique culpa, veniam nesciunt reiciendis officiis in laborum nemo suscipit.</p>
-          </div>
-          <div class="col-lg-4 centered si">
-            <i class="bi bi-gift"></i>
-            <h4>Envios Gratis desde $ 5000.</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates cum sed magnam voluptas placeat, sapiente dolor pariatur quo aut veritatis dolore fuga ipsum voluptatem mollitia.</p>
-          </div>
-          <div class="col-lg-4 centered si">
-            <i class="bi bi-shield-check"></i>
-            <h4>Seguridad desde principio a fin.</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad error magni ducimus doloribus vero quisquam eveniet ullam totam repellendus incidunt, exercitationem magnam, modi officia ab.</p>
-          </div>
+            <div class="col-lg-4 centered si">
+                <i class="bi bi-credit-card"></i>
+                <h4>Elige como pagar.</h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, optio. At, dolorum officia incidunt,
+                    ab similique culpa, veniam nesciunt reiciendis officiis in laborum nemo suscipit.</p>
+            </div>
+            <div class="col-lg-4 centered si">
+                <i class="bi bi-gift"></i>
+                <h4>Envios Gratis desde $ 5000.</h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates cum sed magnam voluptas placeat,
+                    sapiente dolor pariatur quo aut veritatis dolore fuga ipsum voluptatem mollitia.</p>
+            </div>
+            <div class="col-lg-4 centered si">
+                <i class="bi bi-shield-check"></i>
+                <h4>Seguridad desde principio a fin.</h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad error magni ducimus doloribus vero
+                    quisquam eveniet ullam totam repellendus incidunt, exercitationem magnam, modi officia ab.</p>
+            </div>
         </div>
     </div>
-    <!-- *** tarjetas *** -->
-
-   <!--  <section>
-        <form action="">
-            <input type="text" id="imagen" name="imagen" placeholder="imagen del producto" />
-           <input type="text" id="inputAgregarArticulo" class="" placeholder="nombre del producto" />
-            <input type="text" id="inputAgregarPrecio" class="" placeholder="precio del producto" />
-            <input type="text" id="inputAgregarCantidad" class="" placeholder="cantidades del producto" />
-            <button type="submit" id="btnAgregarArticulo" class="btn btn-primary">Agregar</button>
-         
-
-
-        </form>
-    </section> -->
-    <!-- Footer-->
     <footer class="py-5 bg-dark">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; AdictaSomos 2022.</p>
         </div>
     </footer>
-
-
-
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -293,8 +267,5 @@
     <!-- Core theme JS-->
     <script src="js/iniciar.js"></script>
     <script src="js/carrito.js"></script>
-
-
 </body>
-
 </html>

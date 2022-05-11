@@ -3,15 +3,17 @@ body{
 }
 .botones{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 1rem;
+    flex-wrap: wrap;
     width: 100%;
     height: 100%;
-    margin: 0;
-    margin-left: 50px;
-    padding: 0;
 
 
+}
+.seccion1{
+    margin-top:10rem;
 }
 #iniciosesion{
     z-index: 5;
