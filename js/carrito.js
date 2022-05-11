@@ -135,6 +135,7 @@ function comprarCarrito(i) {
   localStorage.setItem("contador", JSON.stringify(arrContador));
   contadorCarrito.innerHTML = arrContador;
   contadorCarritoPagarTodo.innerHTML = arrContador;
+  carritoAdicta.innerHTML = "";
  
   }
 function eliminarDelCarrito(i) { 
