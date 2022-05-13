@@ -13,7 +13,9 @@ let data,
   pagarTodo = document.getElementById("pagarTodo"),
   mostrarPago = document.getElementById("mostrarPago"),
   contadorCarrito = document.getElementById("contadorCarrito"),
-  contadorCarritoPagarTodo = document.getElementById("contadorCarritoPagarTodo"),
+  contadorCarritoPagarTodo = document.getElementById(
+    "contadorCarritoPagarTodo"
+  ),
   contador = [],
   formReset = document.getElementById("formAgregarArticulos"),
   BBDD = [];
@@ -50,17 +52,15 @@ async function renderizar() {
   localStorage.setItem("BASEDEDATOS", JSON.stringify(data));
 }
 renderizar();
-
-function agregarAlCarrito(i) { 
+function agregarAlCarrito(i) {
   carrito = JSON.parse(localStorage.getItem("carrito"));
-    
   if (carrito === null) {
     carrito = [];
   }
   let producto = BBDD[i];
   let existe = false;
   for (let j = 0; j < carrito.length; j++) {
-
+    console.log(carrito.length);
     if (carrito[j].id == producto.id) {
       existe = true;
       carrito[j].cantidad++;
@@ -71,7 +71,6 @@ function agregarAlCarrito(i) {
         showConfirmButton: false,
         timer: 500,
       });
-      break;
     }
   }
   if (!existe) {
@@ -87,27 +86,27 @@ function agregarAlCarrito(i) {
   }
   contadorCarritoPagarTodo.innerHTML = carrito.length;
   contadorCarrito.innerHTML = carrito.length;
-  total2 = carrito.reduce((accum, producto) => accum + producto.precio * producto.cantidad, 0);
+  total2 = carrito.reduce(
+    (accum, producto) => accum + producto.precio * producto.cantidad,
+    0
+  );
   localStorage.setItem("total", JSON.stringify(total2));
   localStorage.setItem("contador", JSON.stringify(contadorCarrito.innerHTML));
-  
+  localStorage.setItem("carrito", JSON.stringify(carrito));
   carritoAdicta.innerHTML = "";
-    renderizarCarrito();
-    localStorage.setItem("carrito", JSON.stringify(carrito));
+  renderizarCarrito();
 }
-
-carrito = JSON.parse(localStorage.getItem("carrito"));
-renderizarCarrito();
+console.log("carrito2");
 function renderizarCarrito() {
   carritoS = JSON.parse(localStorage.getItem("carrito"));
   if (carritoS === null) {
-    console.log("no hay nada");
-  } else {
-    for (let i = 0; i < carritoS.length; i++) {
-      let { imagen, nombre, precio, cantidad, id } = carritoS[i]; //destructuracion
-      let carritoAdicta = document.getElementById("carritoAdicta");
-      precioTotalprenda = cantidad * precio;
-      carritoAdicta.innerHTML += `
+    carritoS = [];
+  }
+  for (let i = 0; i < carritoS.length; i++) {
+    let { imagen, nombre, precio, cantidad, id } = carritoS[i]; //destructuracion
+    let carritoAdicta = document.getElementById("carritoAdicta");
+    precioTotalprenda = cantidad * precio;
+    carritoAdicta.innerHTML += `
       <tr>
       <td><img class="rounded-circle w-25 h-25" src="images/${imagen}" alt="${i}"></td>
       <td>${nombre}</td>
@@ -120,20 +119,26 @@ function renderizarCarrito() {
       </tbody>
   `;
   }
-  
-total2 = JSON.parse(localStorage.getItem("total"));
-contador = JSON.parse(localStorage.getItem("contador"));
-contadorCarritoPagarTodo.innerHTML = contador;
-contadorCarrito.innerHTML = contador;  
+  total2 = JSON.parse(localStorage.getItem("total"));
+  contador = JSON.parse(localStorage.getItem("contador"));
+  contadorCarritoPagarTodo.innerHTML = contador;
+  contadorCarrito.innerHTML = contador;
 }
-}
+carritoAdicta.innerHTML = "";
+renderizarCarrito();
 function comprarCarrito(i) {
   let arr = JSON.parse(localStorage.getItem("carrito"));
   let precioTotalPrenda = arr[i].precio * arr[i].cantidad;
-  swal.fire("Compra realizada", `Gracias por comprar con nosotros ${precioTotalPrenda}`, "success");
-  
+  swal.fire(
+    "Compra realizada",
+    `Gracias por comprar con nosotros ${precioTotalPrenda}`,
+    "success"
+  );
   arr.splice(i, 1);
-  total2 = arr.reduce((accum, producto) => accum + producto.precio * producto.cantidad, 0);
+  total2 = arr.reduce(
+    (accum, producto) => accum + producto.precio * producto.cantidad,
+    0
+  );
   localStorage.setItem("total", JSON.stringify(total2));
   localStorage.setItem("carrito", JSON.stringify(arr));
   carritoAdicta.innerHTML = "";
@@ -143,14 +148,15 @@ function comprarCarrito(i) {
   contadorCarrito.innerHTML = arrContador;
   contadorCarritoPagarTodo.innerHTML = arrContador;
   carritoAdicta.innerHTML = "";
- 
-  }
-function eliminarDelCarrito(i) { 
+}
+function eliminarDelCarrito(i) {
   let arr = JSON.parse(localStorage.getItem("carrito"));
   arr.splice(i, 1);
   localStorage.removeItem(arr);
-  total2 = arr.reduce((accum, producto) => accum + producto.precio * producto.cantidad, 0);
-  
+  total2 = arr.reduce(
+    (accum, producto) => accum + producto.precio * producto.cantidad,
+    0
+  );
   localStorage.setItem("total", JSON.stringify(total2));
   localStorage.setItem("carrito", JSON.stringify(arr));
   let arrContador = JSON.parse(localStorage.getItem("contador"));
@@ -158,36 +164,37 @@ function eliminarDelCarrito(i) {
   localStorage.setItem("contador", JSON.stringify(arrContador));
   contadorCarrito.innerHTML = arrContador;
   contadorCarritoPagarTodo.innerHTML = arrContador;
- carritoAdicta.innerHTML = "";
+  carritoAdicta.innerHTML = "";
 }
 function agregar(e) {
   e.preventDefault();
-  if(usuario !== "" && contrasena !== ""){
+  if (usuario !== "" && contrasena !== "") {
     swal.fire("Gracias ", ``, "success");
-  
-  let nombre = document.getElementById("nombreFormAgregar").value;
-  let precio = document.getElementById("precioFormAgregar").value;
-  let imagen = document.getElementById("imagenFormAgregar").value;
-  let id = BBDD.length + 1;
-  let cantidad = 0;
-  (nombre === "" || precio === "" || imagen === "") ? swal.fire("debe llenar todos los campos", "", "warning") : swal.fire("listo. su producto fue agregado.", "", "success"); // operador ternario
-  let nuevoArticulo = {
-    imagen,
-    nombre,
-    precio,
-    id,
-    cantidad,
-  };
-  BBDD = JSON.parse(localStorage.getItem("BASEDEDATOS"));
-  
-  BBDD = [...BBDD, nuevoArticulo];
-  
-  BBDD.forEach((producto) => {    
-    tiendaAdicta.innerHTML = "";
-    tiendaAdicta.innerHTML += `
+    let nombre = document.getElementById("nombreFormAgregar").value;
+    let precio = document.getElementById("precioFormAgregar").value;
+    let imagen = document.getElementById("imagenFormAgregar").value;
+    let id = BBDD.length + 1;
+    let cantidad = 0;
+    nombre === "" || precio === "" || imagen === ""
+      ? swal.fire("debe llenar todos los campos", "", "warning")
+      : swal.fire("listo. su producto fue agregado.", "", "success"); // operador ternario
+    let nuevoArticulo = {
+      imagen,
+      nombre,
+      precio,
+      id,
+      cantidad,
+    };
+    BBDD = JSON.parse(localStorage.getItem("BASEDEDATOS"));
+    BBDD = [...BBDD, nuevoArticulo];
+    BBDD.forEach((producto) => {
+      tiendaAdicta.innerHTML = "";
+      tiendaAdicta.innerHTML += `
     <div class="col-md-4 my-5">
             <div class="card h-100">
-            <img class="card-img-top img-fluid" src="images/${producto.imagen}" alt="..." />
+            <img class="card-img-top img-fluid" src="images/${
+              producto.imagen
+            }" alt="..." />
                 <div class="card-body p-4">
                 <div class="text-center">
                     <h5 class="card-title ">${producto.nombre}</h5>
@@ -196,21 +203,21 @@ function agregar(e) {
                     </p>
                 </div>
                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent mt-5">
-        <div class="text-center"><button class="btn btn-outline-dark mt-auto mensajeComprar" onclick="agregarAlCarrito(${producto.length + 1})" id="${producto.id}" >Agregar al carrito</button></div>
+        <div class="text-center"><button class="btn btn-outline-dark mt-auto mensajeComprar" onclick="agregarAlCarrito(${
+          producto.length + 1
+        })" id="${producto.id}" >Agregar al carrito</button></div>
         </div>
         </div>
         </div>
         </div>
     `;
-
-    
     });
     localStorage.setItem("BASEDEDATOS", JSON.stringify(BBDD));
-  }else{
+  } else {
     swal.fire("debe iniciar sesion", "", "warning");
   }
-    renderizar();
-    formReset.reset();
+  renderizar();
+  formReset.reset();
 }
 function pagarTodoCarrito() {
   const DateTime = luxon.DateTime;
@@ -218,7 +225,7 @@ function pagarTodoCarrito() {
   const hora = DateTime.local().hour;
   const minuto = DateTime.local().minute;
   const segundo = DateTime.local().second;
-  total2 = JSON.parse(localStorage.getItem("total"))
+  total2 = JSON.parse(localStorage.getItem("total"));
   setTimeout(() => {
     Swal.fire({
       title: `
@@ -236,22 +243,26 @@ function pagarTodoCarrito() {
       </div>    
       `,
       width: 800,
-      padding: '1em',
-      color: '#716add',
+      padding: "1em",
+      color: "#716add",
       showConfirmButton: false,
-            timer: 2000
-    })
+      timer: 2000,
+    });
     carrito.splice(0, carrito.length);
   }, 500);
   carritoAdicta.innerHTML = "";
   contadorCarrito.innerHTML = 0;
-  contadorCarritoPagarTodo.innerHTML = 0; 
+  contadorCarritoPagarTodo.innerHTML = 0;
   localStorage.removeItem("carrito");
   localStorage.removeItem("total");
-  localStorage.removeItem("contador");  
+  localStorage.removeItem("contador");
 }
-document.getElementById("carritoDeCompras").addEventListener("click", () => abrirVentana("carritoDeCompras"));
-document.getElementById("articulosAgregados").addEventListener("click", () => abrirVentana("articulosAgregados"));
+document
+  .getElementById("carritoDeCompras")
+  .addEventListener("click", () => abrirVentana("carritoDeCompras"));
+document
+  .getElementById("articulosAgregados")
+  .addEventListener("click", () => abrirVentana("articulosAgregados"));
 function abrirVentana(ventana) {
   if (ventana == "carritoDeCompras") {
     document.getElementById("carritoDeCompras").style.display = "block";
@@ -278,9 +289,6 @@ document.getElementById("ecomerceVentana").addEventListener("click", () => {
 });
 
 document.getElementById("carritoCompras").addEventListener("click", (e) => {
-    e.preventDefault();
-    return abrirVentana("carritoDeCompras");
-    }
-    );
-
-    
+  e.preventDefault();
+  return abrirVentana("carritoDeCompras");
+});

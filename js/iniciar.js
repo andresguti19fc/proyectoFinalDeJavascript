@@ -14,7 +14,7 @@ let formIniciarSesion = document.getElementById("formIniciarSesion");
       contrasena = sessionStorage.getItem("contrasena");
      
       inicioDeSession = (usuario !== "" && isNaN("usuario") && contrasena !== "" && !isNaN(contrasena)) ? true : false;
-      inicioDeSession ? swal.fire("bienvenido", "", "success") : swal.fire("error", "", "error"); // operador ternario
+      inicioDeSession ? swal.fire("bienvenido", "", "success") : swal.fire("error", "Usuario o Contraseña incorrecta", "error"); // operador ternario
     });
 
 
